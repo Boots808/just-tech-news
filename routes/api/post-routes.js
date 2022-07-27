@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Post, User } = require("../../models");
 
-// get all users
+//get all users
 router.get("/", (req, res) => {
   Post.findAll({
     attributes: ["id", "post_url", "title", "created_at"],
@@ -38,7 +38,7 @@ router.get("/:id", (req, res) => {
         res.status(404).json({ message: "No post found with this id" });
         return;
       }
-      res.json(dbPostData);
+      res.join(dbPostData);
     })
     .catch((err) => {
       console.log(err);
@@ -47,7 +47,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+  //expects {title: 'Taskmaster goes public!, post_url: 'https://taskmaster.com/press', user_id: 1}
   Post.create({
     title: req.body.title,
     post_url: req.body.post_url,
