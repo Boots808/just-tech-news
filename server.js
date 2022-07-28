@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const exphbs = require("express-handlebars");
-const { route } = require("./controllers");
+//const { route } = require("./controllers");
 const hbs = exphbs.create({});
 
 app.engine("handlebars", hbs.engine);
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 //turn on routes
-app.use(controllers);
+app.use(require("./controllers/"));
 
 //turn on connection to db and server
 sequelize.sync({ force: true }).then(() => {
